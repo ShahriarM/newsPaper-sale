@@ -1,2 +1,2 @@
 # newsPaper-sale
-to model newsPaper-sale
+This is an excercise and providing some results
