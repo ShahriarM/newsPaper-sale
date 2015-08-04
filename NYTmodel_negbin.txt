@@ -1,0 +1,31 @@
+data{
+  a <- 1.0
+  b <- 1.0
+}
+model{ 
+
+for( i in 1:L){
+  sold[i] ~ dnegbin( p[week.day[i],account[i]], r[week.day[i],account[i]])
+  sold_pred[i] ~ dnegbin( p[week.day[i],account[i]], r[week.day[i],account[i]])
+}
+
+ 
+  for(i in 1:N.accounts){
+    for(k in 1:N.week.day){
+      p[k,i] <- r[k,i] / (r[k,i] + m[k,i])
+
+      r[k,i] ~ dgamma(r.a,r.b)
+      m[k,i] ~ dgamma(m.a,m.b)
+     
+      #v[k,i] <- r[k,i]*(1-p[k,i])/(p[k,i]*p[k,i])
+
+      }
+  }
+       r.a ~ dgamma(a,b)
+      r.b ~ dgamma(a,b)
+      m.a ~ dgamma(a,b)
+      m.b ~ dgamma(a,b)
+      
+
+
+}
